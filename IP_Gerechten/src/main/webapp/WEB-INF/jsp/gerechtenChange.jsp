@@ -9,7 +9,7 @@
     <title>Change Gerecht</title>
 </head>
 <body>
-
+<h2>Change Gerecht</h2>
 <c:choose>
     <c:when test="${errors != null}">
         <table>
@@ -26,8 +26,8 @@
             <c:forEach var="gerecht" items="${gerechten}">
                 <tr>
                     <td>${gerecht.description}</td>
-                    <td><a href="/gerechten/update/${gerecht.description}">Update</a></td>
-                    <td><a href="/gerechten/delete/${gerecht.description}">Delete</a></td>
+                    <td><a href="/gerechten/update/${gerecht.id}">Update</a></td>
+                    <td><a href="/gerechten/delete/${gerecht.id}">Delete</a></td>
                 </tr>
             </c:forEach>
         </table>

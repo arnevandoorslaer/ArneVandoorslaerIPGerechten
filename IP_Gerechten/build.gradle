@@ -12,7 +12,6 @@ buildscript {
     }
 }
 
-
 // ################################################################
 // Plugins.
 // ################################################################
@@ -24,16 +23,14 @@ apply plugin: 'org.springframework.boot' // incorporate the spring boot gradle p
 // spring-boot-dependencies bom from the version of Spring Boot that you are using.
 apply plugin: 'io.spring.dependency-management'
 
-
 // ################################################################
 // Name and version of the jar to build (running the bootjar task).
 // ################################################################
 
 bootJar {
     baseName = 'feedback'
-    version =  '0.1.0'
+    version = '0.1.0'
 }
-
 
 // ################################################################
 // Dependencies are retrieved from repositories.
@@ -44,7 +41,6 @@ repositories {
     // alternative:
     // jcenter()
 }
-
 
 // ################################################################
 // Properties.
@@ -57,19 +53,17 @@ sourceCompatibility = 1.8 // version to use when compiling source
 // default same as sourceCompatibility ( so you can usually omit it)
 targetCompatibility = 1.8
 
-
 // ################################################################
 // Every project and task can contain user-defined properties,
 // called extra properties, for use in the script.
 // You define them in the ext block.
 // ################################################################
 
-ext{
+ext {
     jstlVersion = '1.2' // now you can use this throughout the script
     tomcatEmbedJasperVersion = '9.0.10'
     ecjVersion = '4.4.2'
 }
-
 
 // ################################################################
 // Dependencies - project dependencies are declared within 

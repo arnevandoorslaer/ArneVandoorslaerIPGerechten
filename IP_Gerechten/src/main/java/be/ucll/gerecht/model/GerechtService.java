@@ -22,11 +22,19 @@ public class GerechtService {
         return this.gerechtDB.getGerecht(d);
     }
 
+    public Gerecht getGerechtById(int id) {
+        return this.gerechtDB.getGerechtById(id);
+    }
+
     public boolean addGerecht(Gerecht g) {
         return this.gerechtDB.addGerecht(g);
     }
 
-    public boolean removeGerecht(Gerecht g){
+    public boolean updateGerecht(Gerecht g) {
+        return this.gerechtDB.updateGerecht(g);
+    }
+
+    public boolean removeGerecht(Gerecht g) {
         return this.gerechtDB.removeGerecht(g);
     }
 

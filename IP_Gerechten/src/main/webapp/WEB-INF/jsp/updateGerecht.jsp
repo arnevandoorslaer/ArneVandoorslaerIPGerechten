@@ -6,10 +6,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add Gerecht</title>
+    <title>Update Gerecht</title>
 </head>
 <body>
-<p>Voeg gerecht toe</p>
+<p>Update Gerecht</p>
 
 <c:if test="${errors != null}">
     <c:forEach var="error" items="${errors}">
@@ -17,7 +17,8 @@
     </c:forEach>
 </c:if>
 
-<form action="/gerechten/add" method="post" modelAttribute="gerecht">
+<form action="/gerechten/update" method="post">
+    <input id="id" name="id" type="hidden" value="${gerecht.id}">
     <p>
         <label for="description">Beschrijving</label>
         <input id="description" name="description" type="text" value="${gerecht.description}">
@@ -35,7 +36,7 @@
         </select>
     </p>
     <p>
-        <input type="submit" value="Voeg toe">
+        <input type="submit" value="Update">
     </p>
 </form>
 </body>
