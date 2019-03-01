@@ -47,8 +47,8 @@ public class GerechtDB {
 
     public boolean updateGerecht(Gerecht g) {
         if (g == null) throw new DBException("Invalid gerecht");
-        removeById(g.getId());
-        return addGerecht(g);
+        gerechten.set(getIndexById(g.getId()),g);
+        return true;
     }
 
     public Gerecht getGerecht(String d) {
@@ -69,6 +69,15 @@ public class GerechtDB {
             if (gerecht.getId() == id) return gerecht;
         }
         throw new DBException("Gerecht not in db");
+    }
+
+    private int getIndexById(int id){
+        for (int i = 0; i < gerechten.size(); i++) {
+            if(gerechten.get(i).getId() == id){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void removeById(int id) {
