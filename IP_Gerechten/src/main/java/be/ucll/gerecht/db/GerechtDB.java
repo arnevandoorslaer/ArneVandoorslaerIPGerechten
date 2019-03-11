@@ -1,6 +1,8 @@
 package be.ucll.gerecht.db;
 
+import be.ucll.gerecht.model.DagMenu;
 import be.ucll.gerecht.model.Gerecht;
+import be.ucll.gerecht.model.WeekMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,26 +10,39 @@ import java.util.List;
 public class GerechtDB {
 
     private List<Gerecht> gerechten;
+    private List<WeekMenu> weekMenus;
     private int CURRENT_ID = 1000;
 
     public GerechtDB() {
         this.gerechten = new ArrayList<>();
+        this.weekMenus = new ArrayList<>();
         init();
     }
 
     private void init() {
-        addGerecht(new Gerecht("Bitterballen", 1.5, "VEGGIE"));
-        addGerecht(new Gerecht("Frikandel", 1.5, "VEGGIE"));
-        addGerecht(new Gerecht("Boulet", 1.5, "VEGGIE"));
-        addGerecht(new Gerecht("Cervela", 1.5, "VEGGIE"));
-        addGerecht(new Gerecht("Frieten XL", 3, "SOEP"));
-        addGerecht(new Gerecht("Frieten L", 2.5, "SOEP"));
-        addGerecht(new Gerecht("Frieten M", 2, "SOEP"));
-        addGerecht(new Gerecht("Frieten S", 1.75, "SOEP"));
-        addGerecht(new Gerecht("Andalouse", 0.75, "SOEP"));
-        addGerecht(new Gerecht("Joppie", 0.75, "DAGSCHOTEL"));
-        addGerecht(new Gerecht("Ketchup", 0.75, "DAGSCHOTEL"));
-        addGerecht(new Gerecht("Mayo", 0.75, "DAGSCHOTEL"));
+        addGerecht(new Gerecht("Spaghetti", 3.4, "VEGGIE"));
+        addGerecht(new Gerecht("Vol au vent", 3, "DAGSCHOTEL"));
+        addGerecht(new Gerecht("Tomatensoep", .50, "SOEP"));
+        addGerecht(new Gerecht("Groentensoep", 1, "SOEP"));
+        addGerecht(new Gerecht("Pompoensoep", 0.75, "SOEP"));
+        addGerecht(new Gerecht("Aspergesoep", 0.50, "SOEP"));
+        addGerecht(new Gerecht("Balletjes in tomatensaus", 3.50, "DAGSCHOTEL"));
+        addGerecht(new Gerecht("Pasta scampi", 3.10, "DAGSCHOTEL"));
+        addGerecht(new Gerecht("Pasta kip", 3.25, "DAGSCHOTEL"));
+        WeekMenu weekMenu1 = new WeekMenu();
+        weekMenu1.addDagMenu(new DagMenu("Dinsdag", "19/02/2019",getGerecht("Spaghetti"),getGerecht("Aspergesoep"),getGerecht("Vol au vent")));
+        weekMenu1.addDagMenu(new DagMenu("Woensdag", "20/02/2019",getGerecht("Spaghetti"),getGerecht("Groentensoep"),getGerecht("Pasta scampi")));
+        weekMenu1.addDagMenu(new DagMenu("Donderdag", "21/02/2019",getGerecht("Spaghetti"),getGerecht("Tomatensoep"),getGerecht("Balletjes in tomatensaus")));
+        weekMenu1.addDagMenu(new DagMenu("Vrijdag ","22/02/2019",getGerecht("Spaghetti"),getGerecht("Aspergesoep"),getGerecht("Pasta kip")));
+        weekMenus.add(weekMenu1);
+
+        WeekMenu weekMenu2 = new WeekMenu();
+        weekMenu2.addDagMenu(new DagMenu("Dinsdag", "26/02/2019",getGerecht("Spaghetti"),getGerecht("Aspergesoep"),getGerecht("Vol au vent")));
+        weekMenu2.addDagMenu(new DagMenu("Woensdag", "27/02/2019",getGerecht("Spaghetti"),getGerecht("Groentensoep"),getGerecht("Pasta scampi")));
+        weekMenu2.addDagMenu(new DagMenu("Donderdag", "28/02/2019",getGerecht("Spaghetti"),getGerecht("Tomatensoep"),getGerecht("Balletjes in tomatensaus")));
+        weekMenu2.addDagMenu(new DagMenu("Vrijdag ","01/03/2019",getGerecht("Spaghetti"),getGerecht("Aspergesoep"),getGerecht("Pasta kip")));
+        weekMenus.add(weekMenu2);
+
     }
 
     public boolean addGerecht(Gerecht g) {
@@ -62,6 +77,10 @@ public class GerechtDB {
 
     public List<Gerecht> getGerechten() {
         return this.gerechten;
+    }
+
+    public List<WeekMenu> getWeekMenus() {
+        return this.weekMenus;
     }
 
     public Gerecht getGerechtById(int id) {

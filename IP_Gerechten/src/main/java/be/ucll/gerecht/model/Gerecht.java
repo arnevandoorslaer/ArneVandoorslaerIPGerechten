@@ -1,5 +1,7 @@
 package be.ucll.gerecht.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,7 @@ public class Gerecht {
     @DecimalMax("10.0")
     @DecimalMin("0.10")
     private double price;
+    @JsonIgnore
     private int id = -1;
 
     public Gerecht(String d, double p, String t) {
@@ -73,7 +76,7 @@ public class Gerecht {
         return Objects.hash(description, id);
     }
 
-    public int CompareTo(Object o) {
+    public int compareTo(Object o) {
         if (this == o) return 0;
         Gerecht gerecht = (Gerecht) o;
         if (this.getId() > gerecht.getId()) {

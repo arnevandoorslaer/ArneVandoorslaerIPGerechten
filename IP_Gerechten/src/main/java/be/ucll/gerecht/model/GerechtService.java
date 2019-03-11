@@ -18,6 +18,10 @@ public class GerechtService {
         return this.gerechtDB.getGerechten();
     }
 
+    public List<WeekMenu> getWeekMenus() {
+        return this.gerechtDB.getWeekMenus();
+    }
+
     public Gerecht getGerecht(String d) {
         return this.gerechtDB.getGerecht(d);
     }
