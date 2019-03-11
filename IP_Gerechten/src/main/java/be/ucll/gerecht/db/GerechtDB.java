@@ -6,12 +6,15 @@ import be.ucll.gerecht.model.WeekMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GerechtDB {
 
     private List<Gerecht> gerechten;
     private List<WeekMenu> weekMenus;
     private int CURRENT_ID = 1000;
+    private AtomicInteger weekId = new AtomicInteger();
+    private AtomicInteger dagId = new AtomicInteger();
 
     public GerechtDB() {
         this.gerechten = new ArrayList<>();
@@ -29,18 +32,19 @@ public class GerechtDB {
         addGerecht(new Gerecht("Balletjes in tomatensaus", 3.50, "DAGSCHOTEL"));
         addGerecht(new Gerecht("Pasta scampi", 3.10, "DAGSCHOTEL"));
         addGerecht(new Gerecht("Pasta kip", 3.25, "DAGSCHOTEL"));
-        WeekMenu weekMenu1 = new WeekMenu();
-        weekMenu1.addDagMenu(new DagMenu("Dinsdag", "19/02/2019",getGerecht("Spaghetti"),getGerecht("Aspergesoep"),getGerecht("Vol au vent")));
-        weekMenu1.addDagMenu(new DagMenu("Woensdag", "20/02/2019",getGerecht("Spaghetti"),getGerecht("Groentensoep"),getGerecht("Pasta scampi")));
-        weekMenu1.addDagMenu(new DagMenu("Donderdag", "21/02/2019",getGerecht("Spaghetti"),getGerecht("Tomatensoep"),getGerecht("Balletjes in tomatensaus")));
-        weekMenu1.addDagMenu(new DagMenu("Vrijdag ","22/02/2019",getGerecht("Spaghetti"),getGerecht("Aspergesoep"),getGerecht("Pasta kip")));
+
+        WeekMenu weekMenu1 = new WeekMenu(weekId.incrementAndGet());
+        weekMenu1.addDagMenu(new DagMenu(dagId.incrementAndGet(), "Dinsdag", "19/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Vol au vent")));
+        weekMenu1.addDagMenu(new DagMenu(dagId.incrementAndGet(), "Woensdag", "20/02/2019", getGerecht("Spaghetti"), getGerecht("Groentensoep"), getGerecht("Pasta scampi")));
+        weekMenu1.addDagMenu(new DagMenu(dagId.incrementAndGet(), "Donderdag", "21/02/2019", getGerecht("Spaghetti"), getGerecht("Tomatensoep"), getGerecht("Balletjes in tomatensaus")));
+        weekMenu1.addDagMenu(new DagMenu(dagId.incrementAndGet(), "Vrijdag", "22/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Pasta kip")));
         weekMenus.add(weekMenu1);
 
-        WeekMenu weekMenu2 = new WeekMenu();
-        weekMenu2.addDagMenu(new DagMenu("Dinsdag", "26/02/2019",getGerecht("Spaghetti"),getGerecht("Aspergesoep"),getGerecht("Vol au vent")));
-        weekMenu2.addDagMenu(new DagMenu("Woensdag", "27/02/2019",getGerecht("Spaghetti"),getGerecht("Groentensoep"),getGerecht("Pasta scampi")));
-        weekMenu2.addDagMenu(new DagMenu("Donderdag", "28/02/2019",getGerecht("Spaghetti"),getGerecht("Tomatensoep"),getGerecht("Balletjes in tomatensaus")));
-        weekMenu2.addDagMenu(new DagMenu("Vrijdag ","01/03/2019",getGerecht("Spaghetti"),getGerecht("Aspergesoep"),getGerecht("Pasta kip")));
+        WeekMenu weekMenu2 = new WeekMenu(weekId.incrementAndGet());
+        weekMenu2.addDagMenu(new DagMenu(dagId.incrementAndGet(), "Dinsdag", "26/02/2019", getGerecht("Spaghetti"), getGerecht("Tomatensoep"), getGerecht("Vol au vent")));
+        weekMenu2.addDagMenu(new DagMenu(dagId.incrementAndGet(), "Woensdag", "27/02/2019", getGerecht("Spaghetti"), getGerecht("Groentensoep"), getGerecht("Pasta scampi")));
+        weekMenu2.addDagMenu(new DagMenu(dagId.incrementAndGet(), "Donderdag", "28/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Vol au vent")));
+        weekMenu2.addDagMenu(new DagMenu(dagId.incrementAndGet(), "Vrijdag", "01/03/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Pasta kip")));
         weekMenus.add(weekMenu2);
 
     }
@@ -62,7 +66,7 @@ public class GerechtDB {
 
     public boolean updateGerecht(Gerecht g) {
         if (g == null) throw new DBException("Invalid gerecht");
-        gerechten.set(getIndexById(g.getId()),g);
+        gerechten.set(getIndexById(g.getId()), g);
         return true;
     }
 
@@ -90,9 +94,9 @@ public class GerechtDB {
         throw new DBException("Gerecht not in db");
     }
 
-    private int getIndexById(int id){
+    private int getIndexById(int id) {
         for (int i = 0; i < gerechten.size(); i++) {
-            if(gerechten.get(i).getId() == id){
+            if (gerechten.get(i).getId() == id) {
                 return i;
             }
         }

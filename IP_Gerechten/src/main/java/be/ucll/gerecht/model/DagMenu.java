@@ -1,21 +1,44 @@
 package be.ucll.gerecht.model;
 
-import java.time.LocalDate;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class DagMenu {
-    private Gerecht veggie;
-    private Gerecht soep;
-    private Gerecht dagschotel;
+    @JsonIgnore
+    private int id = 0;
     private String dag;
     private String datum;
+    private Gerecht[] gerechten;
 
-    public DagMenu(String dag, String datum,Gerecht veggie, Gerecht soep, Gerecht dagschotel) {
-        setSoep(soep);
-        setVeggie(veggie);
-        setDagschotel(dagschotel);
+    public DagMenu(int id, String dag, String datum, Gerecht veggie, Gerecht soep, Gerecht dagschotel) {
+        gerechten = new Gerecht[3];
+        setId(id);
+        addDagschotel(dagschotel);
+        addVeggie(veggie);
+        addSoep(soep);
+
         setDag(dag);
         setDatum(datum);
+    }
+
+    public void addVeggie(Gerecht gerecht) {
+        gerechten[0] = gerecht;
+    }
+
+    public void addSoep(Gerecht gerecht) {
+        gerechten[1] = gerecht;
+    }
+
+    public void addDagschotel(Gerecht gerecht) {
+        gerechten[2] = gerecht;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDatum() {
@@ -35,26 +58,14 @@ public class DagMenu {
     }
 
     public Gerecht getVeggie() {
-        return veggie;
-    }
-
-    public void setVeggie(Gerecht veggie) {
-        this.veggie = veggie;
+        return gerechten[0];
     }
 
     public Gerecht getSoep() {
-        return soep;
-    }
-
-    public void setSoep(Gerecht soep) {
-        this.soep = soep;
+        return gerechten[1];
     }
 
     public Gerecht getDagschotel() {
-        return dagschotel;
-    }
-
-    public void setDagschotel(Gerecht dagschotel) {
-        this.dagschotel = dagschotel;
+        return gerechten[2];
     }
 }
