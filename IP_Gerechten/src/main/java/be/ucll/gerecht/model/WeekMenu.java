@@ -1,9 +1,12 @@
 package be.ucll.gerecht.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 
 public class WeekMenu {
     ArrayList<DagMenu> menus;
+    @JsonIgnore
     private int id;
 
     public WeekMenu(int id) {

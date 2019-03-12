@@ -7,10 +7,9 @@ public class DagMenu {
     private int id = 0;
     private String dag;
     private String datum;
-    private Gerecht[] gerechten;
+    private Gerecht veggie,soep,dagschotel;
 
     public DagMenu(int id, String dag, String datum, Gerecht veggie, Gerecht soep, Gerecht dagschotel) {
-        gerechten = new Gerecht[3];
         setId(id);
         addDagschotel(dagschotel);
         addVeggie(veggie);
@@ -21,15 +20,15 @@ public class DagMenu {
     }
 
     public void addVeggie(Gerecht gerecht) {
-        gerechten[0] = gerecht;
+        this.veggie = gerecht;
     }
 
     public void addSoep(Gerecht gerecht) {
-        gerechten[1] = gerecht;
+        this.soep = gerecht;
     }
 
     public void addDagschotel(Gerecht gerecht) {
-        gerechten[2] = gerecht;
+        this.dagschotel = gerecht;
     }
 
 
@@ -58,14 +57,14 @@ public class DagMenu {
     }
 
     public Gerecht getVeggie() {
-        return gerechten[0];
+        return this.veggie;
     }
 
     public Gerecht getSoep() {
-        return gerechten[1];
+        return this.soep;
     }
 
     public Gerecht getDagschotel() {
-        return gerechten[2];
+        return this.dagschotel;
     }
 }

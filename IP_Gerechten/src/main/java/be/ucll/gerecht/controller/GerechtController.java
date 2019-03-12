@@ -91,7 +91,7 @@ public class GerechtController {
         if (bindingResult.hasErrors()) {
             for (Object object : bindingResult.getAllErrors()) {
                 FieldError fieldError = (FieldError) object;
-                errors.add(fieldError.getCode());
+                errors.add(fieldError.getDefaultMessage());
             }
         }
         try {

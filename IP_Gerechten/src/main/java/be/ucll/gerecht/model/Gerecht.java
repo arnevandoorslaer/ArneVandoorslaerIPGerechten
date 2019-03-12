@@ -2,20 +2,17 @@ package be.ucll.gerecht.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Gerecht {
-    @NotNull
-    @Size(min = 4, max = 50)
+    @NotEmpty(message = "Description can not be empty.")
+    @Size(min = 4, max = 50,message = "Description length must be between 4 and 50.")
     private String description;
     private String type;
-    @NotNull
-    @DecimalMax("10.0")
-    @DecimalMin("0.10")
+    @NotNull(message = "Price can not be empty.")
+    @DecimalMax(value = "10.0",message = "Price can't be higher than 10.")
+    @DecimalMin(value = "0.10",message = "Price can't be lower than 0.10.")
     private double price;
     @JsonIgnore
     private int id = -1;

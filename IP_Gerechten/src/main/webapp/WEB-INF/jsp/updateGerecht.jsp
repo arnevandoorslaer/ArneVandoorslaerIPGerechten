@@ -6,16 +6,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Update Gerecht</title>
 </head>
 <body>
 <p>Update Gerecht</p>
-
-<c:if test="${errors != null}">
-    <c:forEach var="error" items="${errors}">
-        <p>${error}</p>
-    </c:forEach>
-</c:if>
+    <c:if test="${errors != null}">
+        <c:forEach var="error" items="${errors}">
+            <p>${error}</p>
+        </c:forEach>
+    </c:if>
 
 <form action="/gerechten/update" method="post">
     <input id="id" name="id" type="hidden" value="${gerecht.id}">
