@@ -42,5 +42,7 @@ public class GerechtService {
         return this.gerechtDB.removeGerecht(g);
     }
 
-
+    public boolean addDagMenu(DagMenu dg){
+        return this.gerechtDB.addDagMenu(dg);
+    }
 }

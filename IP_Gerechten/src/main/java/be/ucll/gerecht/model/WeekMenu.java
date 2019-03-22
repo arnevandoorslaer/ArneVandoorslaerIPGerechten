@@ -14,6 +14,10 @@ public class WeekMenu {
         menus = new ArrayList<>();
     }
 
+    public WeekMenu(){
+        
+    }
+
     public void addDagMenu(DagMenu dagMenu) {
         menus.add(dagMenu);
     }

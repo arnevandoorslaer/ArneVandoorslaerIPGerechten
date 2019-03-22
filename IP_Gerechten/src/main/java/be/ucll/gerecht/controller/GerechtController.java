@@ -60,13 +60,15 @@ public class GerechtController {
         if (bindingResult.hasErrors()) {
             for (Object object : bindingResult.getAllErrors()) {
                 FieldError fieldError = (FieldError) object;
-                errors.add(fieldError.getCode());
+                errors.add(fieldError.getDefaultMessage());
             }
         }
-        try {
-            service.addGerecht(gerecht);
-        } catch (DBException e) {
-            errors.add(e.getMessage());
+        else{
+            try {
+                service.addGerecht(gerecht);
+            } catch (DBException e) {
+                errors.add(e.getMessage());
+            }
         }
 
         if (errors.size() > 0) {
@@ -93,11 +95,12 @@ public class GerechtController {
                 FieldError fieldError = (FieldError) object;
                 errors.add(fieldError.getDefaultMessage());
             }
-        }
-        try {
-            service.updateGerecht(gerecht);
-        } catch (DBException e) {
-            errors.add(e.getMessage());
+        }else{
+            try {
+                service.updateGerecht(gerecht);
+            } catch (DBException e) {
+                errors.add(e.getMessage());
+            }
         }
         if (errors.size() > 0) {
             model.addAttribute("gerecht", gerecht);

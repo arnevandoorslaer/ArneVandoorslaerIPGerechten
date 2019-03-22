@@ -19,6 +19,10 @@ public class DagMenu {
         setDatum(datum);
     }
 
+    public DagMenu(){
+
+    }
+
     public void addVeggie(Gerecht gerecht) {
         this.veggie = gerecht;
     }
@@ -66,5 +70,17 @@ public class DagMenu {
 
     public Gerecht getDagschotel() {
         return this.dagschotel;
+    }
+
+    public void setVeggie(Gerecht veggie) {
+        this.veggie = veggie;
+    }
+
+    public void setSoep(Gerecht soep) {
+        this.soep = soep;
+    }
+
+    public void setDagschotel(Gerecht dagschotel) {
+        this.dagschotel = dagschotel;
     }
 }

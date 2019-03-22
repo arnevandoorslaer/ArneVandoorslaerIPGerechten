@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GerechtDB {
-
     private List<Gerecht> gerechten;
     private List<WeekMenu> weekMenus;
     private int CURRENT_ID = 1000;
@@ -105,5 +104,10 @@ public class GerechtDB {
 
     public void removeById(int id) {
         removeGerecht(getGerechtById(id));
+    }
+
+    public boolean addDagMenu(DagMenu dagMenu){
+        weekMenus.get(0).addDagMenu(dagMenu);
+        return true;
     }
 }
