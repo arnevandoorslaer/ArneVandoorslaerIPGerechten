@@ -127,3 +127,11 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/java,gradle,intellij
 
 \.DS_Store
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/modules/IP_Gerechten.iml
+.idea/modules/IP_Gerechten.main.iml
+.idea/modules/IP_Gerechten.test.iml
+.idea/vcs.xml
