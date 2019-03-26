@@ -128,3 +128,9 @@ gradle-app.setting
 .DS_Store
 .idea/encodings.xml
 IP_Gerechten.iml
+.idea/vcs.xml
+.idea/modules/IP_Gerechten_test.iml
+.idea/modules/IP_Gerechten_main.iml
+.idea/modules.xml
+.idea/misc.xml
+.idea/compiler.xml
