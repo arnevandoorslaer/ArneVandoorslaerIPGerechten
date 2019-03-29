@@ -32,6 +32,7 @@ public class MenuController {
     @ResponseStatus(HttpStatus.CREATED)
     public List<WeekMenu> update(@RequestBody @Valid DagMenu dagMenu){
         service.updateDagMenu(dagMenu);
+        
         return weekmenu();
     }
 }
