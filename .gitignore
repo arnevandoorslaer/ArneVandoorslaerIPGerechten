@@ -107,7 +107,6 @@ hs_err_pid*
 
 ### Gradle ###
 .gradle
-build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -121,8 +120,6 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-### Gradle Patch ###
-**/build/
 
 # End of https://www.gitignore.io/api/java,gradle,intellij
 .DS_Store
@@ -141,3 +138,8 @@ IP_Gerechten.iml
 .idea/modules/Arne_Vandoorslaer-IP_Gerechten.iml
 .idea/*
 .idea/
+
+gradlew
+gradlew.bat
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties

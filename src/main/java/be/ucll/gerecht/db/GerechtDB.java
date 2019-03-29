@@ -110,4 +110,9 @@ public class GerechtDB {
         weekMenus.get(0).addDagMenu(dagMenu);
         return true;
     }
+
+    public boolean updateDagMenu(DagMenu dagMenu){
+        weekMenus.get(0).addDagMenu(dagMenu);
+        return true;
+    }
 }
