@@ -28,7 +28,7 @@ apply plugin: 'io.spring.dependency-management'
 // ################################################################
 
 bootJar {
-    baseName = 'feedback'
+    baseName = 'ip_gerechten'
     version = '0.1.0'
 }
 
