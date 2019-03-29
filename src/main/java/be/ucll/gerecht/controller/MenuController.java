@@ -27,4 +27,11 @@ public class MenuController {
         service.addDagMenu(dagMenu);
         return weekmenu();
     }
+
+    @PostMapping("/dagmenu/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<WeekMenu> update(@RequestBody @Valid DagMenu dagMenu){
+        service.updateDagMenu(dagMenu);
+        return weekmenu();
+    }
 }

@@ -45,4 +45,8 @@ public class GerechtService {
     public boolean addDagMenu(DagMenu dg){
         return this.gerechtDB.addDagMenu(dg);
     }
+
+    public boolean updateDagMenu(DagMenu dg) {
+        return this.gerechtDB.updateDagMenu(dg);
+    }
 }
