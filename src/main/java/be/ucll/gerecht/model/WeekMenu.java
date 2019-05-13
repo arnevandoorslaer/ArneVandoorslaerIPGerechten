@@ -2,24 +2,39 @@ package be.ucll.gerecht.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class WeekMenu {
-    ArrayList<DagMenu> menus;
+    @OneToMany
+    List<DagMenu> menus;
     @JsonIgnore
+    @Id
     private int id;
 
     public WeekMenu(int id) {
         setId(id);
         menus = new ArrayList<>();
+
     }
 
-    public WeekMenu(){
-        
+    public WeekMenu(){};
+
+    public void updateDagMenu(DagMenu dg){
+        menus.remove(dg);
+        menus.add(dg);
     }
 
     public void addDagMenu(DagMenu dagMenu) {
         menus.add(dagMenu);
+    }
+
+    public void removeDagMenu(DagMenu dagMenu) {
+        menus.remove(dagMenu);
     }
 
     public int getId() {
@@ -30,7 +45,7 @@ public class WeekMenu {
         this.id = id;
     }
 
-    public ArrayList<DagMenu> getDagMenus() {
+    public List<DagMenu> getDagMenus() {
         return this.menus;
     }
 }

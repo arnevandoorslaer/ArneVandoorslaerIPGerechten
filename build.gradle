@@ -86,6 +86,10 @@ managed by the spring boot bill of materials (aka BOM).
 dependencies {
     // needed for Spring Boot -> embedded tomcat
     compile("org.springframework.boot:spring-boot-starter-web")
+
+    // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.0.1.RELEASE'
+
     // needed because we use jsp
     // compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     compile group: 'javax.servlet', name: 'jstl', version: jstlVersion // use the user-defined property
@@ -95,7 +99,16 @@ dependencies {
     // needed because we use jsp
     // compile group: 'org.eclipse.jdt.core.compiler', name: 'ecj', version: '4.4.2'
     compile group: 'org.eclipse.jdt.core.compiler', name: 'ecj', version: ecjVersion
+    
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile('mysql:mysql-connector-java:8.0.13')
+    // needed for in-memory database
+    compile("com.h2database:h2")
+
+    // use actuator
+    compile("org.springframework.boot:spring-boot-starter-actuator")
 
     // for testing
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
 }

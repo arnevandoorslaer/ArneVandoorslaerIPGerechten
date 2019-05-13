@@ -2,11 +2,19 @@ package be.ucll.gerecht.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+
+@Entity
 public class DagMenu {
     @JsonIgnore
+    @Id
     private int id = 0;
     private String dag;
     private String datum;
+    @OneToOne
     private Gerecht veggie,soep,dagschotel;
 
     public DagMenu(int id, String dag, String datum, Gerecht veggie, Gerecht soep, Gerecht dagschotel) {
@@ -19,9 +27,17 @@ public class DagMenu {
         setDatum(datum);
     }
 
-    public DagMenu(){
+    public DagMenu(String dag, String datum, Gerecht veggie, Gerecht soep, Gerecht dagschotel) {
+        setId(DateConverter.GetWeekNrFromString(datum));
+        addDagschotel(dagschotel);
+        addVeggie(veggie);
+        addSoep(soep);
 
+        setDag(dag);
+        setDatum(datum);
     }
+
+    public DagMenu(){}
 
     public void addVeggie(Gerecht gerecht) {
         this.veggie = gerecht;
@@ -83,4 +99,5 @@ public class DagMenu {
     public void setDagschotel(Gerecht dagschotel) {
         this.dagschotel = dagschotel;
     }
+
 }

@@ -1,52 +1,71 @@
 package be.ucll.gerecht.model;
 
-import be.ucll.gerecht.db.GerechtDB;
+import be.ucll.gerecht.repository.GerechtRepository;
+import be.ucll.gerecht.repository.WeekMenuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class GerechtService {
 
-    private GerechtDB gerechtDB;
+    @Autowired
+    WeekMenuRepository weekMenuRepository;
 
-    public GerechtService() {
-        this.gerechtDB = new GerechtDB();
+    @Autowired
+    GerechtRepository gerechtRepository;
+
+     public GerechtService() {
+
     }
 
+
     public List<Gerecht> getGerechten() {
-        return this.gerechtDB.getGerechten();
+        return this.gerechtRepository.findAll();
     }
 
     public List<WeekMenu> getWeekMenus() {
-        return this.gerechtDB.getWeekMenus();
+        return this.weekMenuRepository.findAll();
     }
 
     public Gerecht getGerecht(String d) {
-        return this.gerechtDB.getGerecht(d);
+        return this.gerechtRepository.findByDescription(d);
     }
 
     public Gerecht getGerechtById(int id) {
-        return this.gerechtDB.getGerechtById(id);
+        return this.gerechtRepository.findById(id);
     }
 
-    public boolean addGerecht(Gerecht g) {
-        return this.gerechtDB.addGerecht(g);
+    public Gerecht addGerecht(Gerecht g) {
+        return this.gerechtRepository.save(g);
     }
 
-    public boolean updateGerecht(Gerecht g) {
-        return this.gerechtDB.updateGerecht(g);
+    public Gerecht updateGerecht(Gerecht g) {
+        return this.gerechtRepository.save(g);
     }
 
-    public boolean removeGerecht(Gerecht g) {
-        return this.gerechtDB.removeGerecht(g);
+    public void removeGerecht(Gerecht g) {
+        this.gerechtRepository.delete(g);
     }
 
-    public boolean addDagMenu(DagMenu dg){
-        return this.gerechtDB.addDagMenu(dg);
+    public void addDagMenu(DagMenu dg){
+        int weekId = DateConverter.GetWeekNrFromString(dg.getDatum());
+        if(this.weekMenuRepository.findWeekMenuById(weekId) == null){
+            this.weekMenuRepository.save(new WeekMenu(weekId));
+        }
+        this.weekMenuRepository.findWeekMenuById(weekId).addDagMenu(dg);
     }
 
-    public boolean updateDagMenu(DagMenu dg) {
-        return this.gerechtDB.updateDagMenu(dg);
+    public void updateDagMenu(DagMenu dg) {
+        int weekId = DateConverter.GetWeekNrFromString(dg.getDatum());
+        this.weekMenuRepository.findWeekMenuById(weekId).removeDagMenu(dg);
+    }
+
+    public void removeDagMenu(DagMenu dg) {
+        int weekId = DateConverter.GetWeekNrFromString(dg.getDatum());
+        if(this.weekMenuRepository.findWeekMenuById(weekId) == null){
+            this.weekMenuRepository.save(new WeekMenu(weekId));
+        }
+        this.weekMenuRepository.findWeekMenuById(weekId).updateDagMenu(dg);
     }
 }

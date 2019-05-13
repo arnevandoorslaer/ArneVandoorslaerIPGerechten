@@ -28,11 +28,10 @@ public class MenuController {
         return weekmenu();
     }
 
-    @PostMapping("/dagmenu/update")
+    @PostMapping("/dagmenu/change/{dagMenu.datum}")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<WeekMenu> update(@RequestBody @Valid DagMenu dagMenu){
+    public List<WeekMenu> update(@PathVariable(value = "dagMenu.datum") String datum,@RequestBody @Valid DagMenu dagMenu){
         service.updateDagMenu(dagMenu);
-        
         return weekmenu();
     }
 }
