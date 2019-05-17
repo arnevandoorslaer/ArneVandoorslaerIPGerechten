@@ -2,15 +2,17 @@ package be.ucll.gerecht.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class WeekMenu {
-    @OneToMany
+public class WeekMenu implements Serializable {
+    @OneToMany(cascade= CascadeType.ALL)
     List<DagMenu> menus;
     @JsonIgnore
     @Id
@@ -30,6 +32,11 @@ public class WeekMenu {
     }
 
     public void addDagMenu(DagMenu dagMenu) {
+        for (DagMenu menu:menus) {
+            if(menu.equals(dagMenu)){
+                throw new DomainException("Dagmenu already exists");
+            }
+        }
         menus.add(dagMenu);
     }
 

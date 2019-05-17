@@ -4,6 +4,7 @@ import be.ucll.gerecht.repository.GerechtRepository;
 import be.ucll.gerecht.repository.WeekMenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -15,7 +16,7 @@ public class GerechtService {
     @Autowired
     GerechtRepository gerechtRepository;
 
-     public GerechtService() {
+    public GerechtService() {
 
     }
 
@@ -48,24 +49,44 @@ public class GerechtService {
         this.gerechtRepository.delete(g);
     }
 
-    public void addDagMenu(DagMenu dg){
-        int weekId = DateConverter.GetWeekNrFromString(dg.getDatum());
-        if(this.weekMenuRepository.findWeekMenuById(weekId) == null){
-            this.weekMenuRepository.save(new WeekMenu(weekId));
-        }
-        this.weekMenuRepository.findWeekMenuById(weekId).addDagMenu(dg);
+    public WeekMenu getWeekMenu(int id){
+        return this.weekMenuRepository.findWeekMenuById(id);
     }
 
-    public void updateDagMenu(DagMenu dg) {
+    public WeekMenu addDagMenu(DagMenu dg) {
         int weekId = DateConverter.GetWeekNrFromString(dg.getDatum());
-        this.weekMenuRepository.findWeekMenuById(weekId).removeDagMenu(dg);
+        WeekMenu temp = this.weekMenuRepository.findWeekMenuById(weekId);
+        if (temp == null) {
+            this.weekMenuRepository.save(new WeekMenu(weekId));
+        }
+        temp = this.weekMenuRepository.findWeekMenuById(weekId);
+        temp.addDagMenu(dg);
+        weekMenuRepository.save(temp);
+        return temp;
     }
 
     public void removeDagMenu(DagMenu dg) {
         int weekId = DateConverter.GetWeekNrFromString(dg.getDatum());
-        if(this.weekMenuRepository.findWeekMenuById(weekId) == null){
+        WeekMenu temp = this.weekMenuRepository.findWeekMenuById(weekId);
+        temp.removeDagMenu(dg);
+        weekMenuRepository.save(temp);
+    }
+
+    public WeekMenu updateDagMenu(DagMenu dg) {
+        int weekId = DateConverter.GetWeekNrFromString(dg.getDatum());
+        WeekMenu temp = this.weekMenuRepository.findWeekMenuById(weekId);
+        if (temp == null) {
             this.weekMenuRepository.save(new WeekMenu(weekId));
         }
-        this.weekMenuRepository.findWeekMenuById(weekId).updateDagMenu(dg);
+        temp = this.weekMenuRepository.findWeekMenuById(weekId);
+        temp.updateDagMenu(dg);
+        weekMenuRepository.save(temp);
+        return temp;
+    }
+
+    public boolean checkIfGerechtExists(String description) {
+        Gerecht gerecht = this.gerechtRepository.findByDescription(description);
+        System.out.println(gerecht);
+        return gerecht == null;
     }
 }

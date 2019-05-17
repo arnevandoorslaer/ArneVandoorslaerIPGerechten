@@ -7,9 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
 @Entity
-public class Gerecht {
+public class Gerecht implements Serializable {
     @NotEmpty(message = "Description can not be empty.")
     @Size(min = 4, max = 50,message = "Description length must be between 4 and 50.")
     private String description;
@@ -65,4 +66,28 @@ public class Gerecht {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "Gerecht{" +
+                "description='" + description + '\'' +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Gerecht gerecht = (Gerecht) o;
+
+        return getDescription() != null ? getDescription().equals(gerecht.getDescription()) : gerecht.getDescription() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getDescription() != null ? getDescription().hashCode() : 0;
+    }
 }

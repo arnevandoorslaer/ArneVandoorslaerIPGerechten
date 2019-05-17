@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GerechtRepository extends JpaRepository<Gerecht,Long> {
-    Gerecht findByDescription(String name);
+    Gerecht findByDescription(String description);
     Gerecht findById(int id);
 }

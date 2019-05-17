@@ -25,7 +25,7 @@ public class GerechtController {
         return "index";
     }
 
-    @GetMapping("/gerechten")
+     @GetMapping(value = "/{locale:nl|en|fr}/gerechten")
     public String gerechten(Model model) {
         ArrayList<String> errors = new ArrayList<>();
         if (service.getGerechten().size() > 0) {
@@ -37,7 +37,7 @@ public class GerechtController {
         return "gerechten";
     }
 
-    @GetMapping("/gerechten/change")
+    @GetMapping(value = "/{locale:nl|en|fr}/gerechten/change")
     public String gerechtenChange(Model model) {
         ArrayList<String> errors = new ArrayList<>();
         if (service.getGerechten().size() > 0) {
@@ -49,12 +49,12 @@ public class GerechtController {
         return "gerechtenChange";
     }
 
-    @GetMapping("/gerechten/add")
+    @GetMapping(value = "/{locale:nl|en|fr}/gerechten/add")
     public String gerechtenChange() {
         return "addGerecht";
     }
 
-    @PostMapping("/gerechten/add")
+    @PostMapping(value = "/gerechten/add")
     public String addGerecht(@Valid Gerecht gerecht, BindingResult bindingResult, Model model) {
         ArrayList<String> errors = new ArrayList<>();
         if (bindingResult.hasErrors()) {
@@ -80,14 +80,14 @@ public class GerechtController {
     }
 
 
-    @GetMapping("/gerechten/update/{gerecht.id}")
+    @GetMapping(value = "/{locale:nl|en|fr}/gerechten/update/{gerecht.id}")
     public String update(@PathVariable(value = "gerecht.id") int id, Model model) {
         Gerecht gerecht = service.getGerechtById(id);
         model.addAttribute("gerecht", gerecht);
         return "updateGerecht";
     }
 
-    @PostMapping("/gerechten/update")
+    @PostMapping(value = "/gerechten/update")
     public String updateConf(@Valid Gerecht gerecht, BindingResult bindingResult, Model model) {
         ArrayList<String> errors = new ArrayList<>();
         if (bindingResult.hasErrors()) {
@@ -110,16 +110,27 @@ public class GerechtController {
         return gerechtenChange(model);
     }
 
-    @GetMapping("/gerechten/delete/{gerecht.id}")
+    @GetMapping(value = "/{locale:nl|en|fr}/gerechten/delete/{gerecht.id}")
     public String delete(@PathVariable(value = "gerecht.id") int id, Model model) {
         Gerecht gerecht = service.getGerechtById(id);
         model.addAttribute("gerecht", gerecht);
         return "deleteGerecht";
     }
 
-    @PostMapping("/gerechten/delete/{gerecht.id}")
+    @PostMapping(value = "/gerechten/delete/{gerecht.id}")
     public String deleteConf(@PathVariable(value = "gerecht.id") int id, Model model) {
         service.removeGerecht(service.getGerechtById(id));
         return gerechtenChange(model);
+    }
+
+    @GetMapping("/login")
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("errorMsg", "Your username and password are invalid.");
+
+        if (logout != null)
+            model.addAttribute("msg", "You have been logged out successfully.");
+
+        return "login";
     }
 }

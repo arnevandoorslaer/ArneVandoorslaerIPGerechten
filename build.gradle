@@ -108,6 +108,9 @@ dependencies {
     // use actuator
     compile("org.springframework.boot:spring-boot-starter-actuator")
 
+    // use spring security
+    compile("org.springframework.boot:spring-boot-starter-security")
+
     // for testing
     testCompile('org.springframework.boot:spring-boot-starter-test')
 

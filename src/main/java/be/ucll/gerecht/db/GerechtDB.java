@@ -5,9 +5,7 @@ import be.ucll.gerecht.model.Gerecht;
 import be.ucll.gerecht.model.WeekMenu;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,8 +14,6 @@ public class GerechtDB {
     private List<WeekMenu> weekMenus;
     private int CURRENT_ID = 1000;
     private AtomicInteger weekId = new AtomicInteger();
-    private AtomicInteger dagId = new AtomicInteger();
-
     public GerechtDB() {
         this.gerechten = new ArrayList<>();
         this.weekMenus = new ArrayList<>();
@@ -38,14 +34,14 @@ public class GerechtDB {
         weekMenus.add(new WeekMenu(weekId.incrementAndGet()));
         weekMenus.add(new WeekMenu(weekId.incrementAndGet()));
 
-        addDagMenu(new DagMenu(dagId.incrementAndGet(), "Dinsdag", "19/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Vol au vent")));
-        addDagMenu(new DagMenu(dagId.incrementAndGet(), "Woensdag", "20/02/2019", getGerecht("Spaghetti"), getGerecht("Groentensoep"), getGerecht("Pasta scampi")));
-        addDagMenu(new DagMenu(dagId.incrementAndGet(), "Donderdag", "21/02/2019", getGerecht("Spaghetti"), getGerecht("Tomatensoep"), getGerecht("Balletjes in tomatensaus")));
-        addDagMenu(new DagMenu(dagId.incrementAndGet(), "Vrijdag", "22/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Pasta kip")));
-        addDagMenu(new DagMenu(dagId.incrementAndGet(), "Dinsdag", "26/02/2019", getGerecht("Spaghetti"), getGerecht("Tomatensoep"), getGerecht("Vol au vent")));
-        addDagMenu(new DagMenu(dagId.incrementAndGet(), "Woensdag", "27/02/2019", getGerecht("Spaghetti"), getGerecht("Groentensoep"), getGerecht("Pasta scampi")));
-        addDagMenu(new DagMenu(dagId.incrementAndGet(), "Donderdag", "28/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Vol au vent")));
-        addDagMenu(new DagMenu(dagId.incrementAndGet(), "Vrijdag", "01/03/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Pasta kip")));
+        addDagMenu(new DagMenu("Dinsdag", "19/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Vol au vent")));
+        addDagMenu(new DagMenu("Woensdag", "20/02/2019", getGerecht("Spaghetti"), getGerecht("Groentensoep"), getGerecht("Pasta scampi")));
+        addDagMenu(new DagMenu("Donderdag", "21/02/2019", getGerecht("Spaghetti"), getGerecht("Tomatensoep"), getGerecht("Balletjes in tomatensaus")));
+        addDagMenu(new DagMenu("Vrijdag", "22/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Pasta kip")));
+        addDagMenu(new DagMenu("Dinsdag", "26/02/2019", getGerecht("Spaghetti"), getGerecht("Tomatensoep"), getGerecht("Vol au vent")));
+        addDagMenu(new DagMenu("Woensdag", "27/02/2019", getGerecht("Spaghetti"), getGerecht("Groentensoep"), getGerecht("Pasta scampi")));
+        addDagMenu(new DagMenu("Donderdag", "28/02/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Vol au vent")));
+        addDagMenu(new DagMenu("Vrijdag", "01/03/2019", getGerecht("Spaghetti"), getGerecht("Aspergesoep"), getGerecht("Pasta kip")));
 
 
     }
@@ -108,7 +104,7 @@ public class GerechtDB {
         removeGerecht(getGerechtById(id));
     }
 
-    public boolean addDagMenu(DagMenu dagMenu){
+    public boolean addDagMenu(DagMenu dagMenu) {
         try {
             getWeekMenuByDatum(dagMenu.getDatum()).addDagMenu(dagMenu);
         } catch (ParseException e) {
@@ -119,9 +115,9 @@ public class GerechtDB {
 
 
     public boolean updateDagMenu(DagMenu dg) throws ParseException {
-        for (int i = 0;i < getWeekMenuByDatum(dg.getDatum()).getDagMenus().size();i++) {
-            if(getWeekMenuByDatum(dg.getDatum()).getDagMenus().get(i).getDatum().equals(dg.getDatum())){
-                getWeekMenuByDatum(dg.getDatum()).getDagMenus().set(i,dg);
+        for (int i = 0; i < getWeekMenuByDatum(dg.getDatum()).getDagMenus().size(); i++) {
+            if (getWeekMenuByDatum(dg.getDatum()).getDagMenus().get(i).getDatum().equals(dg.getDatum())) {
+                getWeekMenuByDatum(dg.getDatum()).getDagMenus().set(i, dg);
                 return true;
             }
         }
@@ -129,7 +125,7 @@ public class GerechtDB {
     }
 
     public WeekMenu getWeekMenuByDatum(String datum) throws ParseException {
-        for (WeekMenu weekmenu:weekMenus) {
+        for (WeekMenu weekmenu : weekMenus) {
             return weekmenu;
         }
         return null;

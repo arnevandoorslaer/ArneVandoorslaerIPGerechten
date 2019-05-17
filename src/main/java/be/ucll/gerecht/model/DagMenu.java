@@ -2,33 +2,20 @@ package be.ucll.gerecht.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
-public class DagMenu {
-    @JsonIgnore
-    @Id
-    private int id = 0;
+public class DagMenu implements Serializable {
     private String dag;
+    @Id
     private String datum;
-    @OneToOne
+    @OneToOne(cascade= CascadeType.ALL)
     private Gerecht veggie,soep,dagschotel;
 
-    public DagMenu(int id, String dag, String datum, Gerecht veggie, Gerecht soep, Gerecht dagschotel) {
-        setId(id);
-        addDagschotel(dagschotel);
-        addVeggie(veggie);
-        addSoep(soep);
-
-        setDag(dag);
-        setDatum(datum);
-    }
 
     public DagMenu(String dag, String datum, Gerecht veggie, Gerecht soep, Gerecht dagschotel) {
-        setId(DateConverter.GetWeekNrFromString(datum));
         addDagschotel(dagschotel);
         addVeggie(veggie);
         addSoep(soep);
@@ -36,6 +23,7 @@ public class DagMenu {
         setDag(dag);
         setDatum(datum);
     }
+
 
     public DagMenu(){}
 
@@ -51,14 +39,6 @@ public class DagMenu {
         this.dagschotel = gerecht;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getDatum() {
         return datum;
@@ -100,4 +80,38 @@ public class DagMenu {
         this.dagschotel = dagschotel;
     }
 
+    @Override
+    public String toString() {
+        return "DagMenu{" +
+                ", dag='" + dag + '\'' +
+                ", datum='" + datum + '\'' +
+                ", veggie=" + veggie +
+                ", soep=" + soep +
+                ", dagschotel=" + dagschotel +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DagMenu dagMenu = (DagMenu) o;
+
+        if (getDag() != null ? !getDag().equals(dagMenu.getDag()) : dagMenu.getDag() != null) return false;
+        if (getDatum() != null ? !getDatum().equals(dagMenu.getDatum()) : dagMenu.getDatum() != null) return false;
+        if (getVeggie() != null ? !getVeggie().equals(dagMenu.getVeggie()) : dagMenu.getVeggie() != null) return false;
+        if (getSoep() != null ? !getSoep().equals(dagMenu.getSoep()) : dagMenu.getSoep() != null) return false;
+        return getDagschotel() != null ? getDagschotel().equals(dagMenu.getDagschotel()) : dagMenu.getDagschotel() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getDag() != null ? getDag().hashCode() : 0;
+        result = 31 * result + (getDatum() != null ? getDatum().hashCode() : 0);
+        result = 31 * result + (getVeggie() != null ? getVeggie().hashCode() : 0);
+        result = 31 * result + (getSoep() != null ? getSoep().hashCode() : 0);
+        result = 31 * result + (getDagschotel() != null ? getDagschotel().hashCode() : 0);
+        return result;
+    }
 }

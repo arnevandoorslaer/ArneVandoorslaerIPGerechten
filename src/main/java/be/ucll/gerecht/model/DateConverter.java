@@ -9,8 +9,7 @@ public class DateConverter {
     public static LocalDate ConvertStringToLocalDate(String dateString){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         //convert String to LocalDate
-        LocalDate localDate = LocalDate.parse(dateString, formatter);
-        return localDate;
+        return LocalDate.parse(dateString, formatter);
     }
 
     public static String ConvertToLocalDateString(LocalDate date){
@@ -21,8 +20,7 @@ public class DateConverter {
     public static int GetWeekNrFromString(String dateString){
         LocalDate date = ConvertStringToLocalDate(dateString);
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int weekNumber = date.get(weekFields.weekOfWeekBasedYear());
-        return weekNumber;
+        return date.get(weekFields.weekOfWeekBasedYear());
     }
 
 }
