@@ -18,6 +18,7 @@ buildscript {
 
 apply plugin: 'java' // support java builds (could also be another language)
 apply plugin: 'idea' // adds support for IntelliJ IDE
+apply plugin: 'war' 
 apply plugin: 'org.springframework.boot' // incorporate the spring boot gradle plugin into our project
 // with the following plugin, Spring Boot’s plugin will automatically import the
 // spring-boot-dependencies bom from the version of Spring Boot that you are using.
@@ -27,7 +28,7 @@ apply plugin: 'io.spring.dependency-management'
 // Name and version of the jar to build (running the bootjar task).
 // ################################################################
 
-bootJar {
+bootWar {
     baseName = 'ip_gerechten'
     version = '0.1.0'
 }
