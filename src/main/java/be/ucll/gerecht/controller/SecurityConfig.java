@@ -15,6 +15,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
                 .mvcMatchers("/").permitAll()
+                .mvcMatchers("/css/bootstrap.css").permitAll()
                 .mvcMatchers("/*").permitAll()
                 .mvcMatchers("/dagmenu/*").permitAll()
                 .mvcMatchers("/weekmenu/*").permitAll()
