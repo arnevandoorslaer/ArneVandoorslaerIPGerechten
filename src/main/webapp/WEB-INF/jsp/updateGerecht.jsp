@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,15 +12,15 @@
 </head>
 <body class="container">
 <h2 class="page-header"><spring:message code="label.updatedishtitle"/></h2>
-    <c:if test="${errors != null}">
-        <table>
-            <c:forEach var="error" items="${errors}">
-                <tr>
-                    <td>${error}</td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
+<c:if test="${errors != null}">
+    <table>
+        <c:forEach var="error" items="${errors}">
+            <tr>
+                <td>${error}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
 
 <form action="/gerechten/update" method="post">
     <input id="id" name="id" type="hidden" value="${gerecht.id}">
@@ -32,14 +32,21 @@
         <label for="price"><spring:message code="label.price"/></label>
         <input id="price" name="price" value="${gerecht.price}">
     </p>
-    <p>
-        <label for="type"><spring:message code="label.type"/></label>
-        <select id="type" name="type">
-            <option value="SOEP">SOEP</option>
-            <option value="DAGSCHOTEL">DAGSCHOTEL</option>
-            <option value="VEGGIE">VEGGIE</option>
-        </select>
-    </p>
+    <label for="type"><spring:message code="label.type"/></label>
+    <select id="type" name="type">
+        <c:forTokens items="SOEP,DAGSCHOTEL,VEGGIE" delims="," var="type">
+            <p>${type}</p>
+            <p>${gerecht.type}</p>
+            <c:choose>
+                <c:when test="${type.equals(gerecht.type)}">
+                    <option selected="selected" value="${type}">${type}</option>
+                </c:when>
+                <c:otherwise>
+                    <option value="${type}">${type}</option>
+                </c:otherwise>
+            </c:choose>
+        </c:forTokens>
+    </select>
     <p>
         <input class="btn btn-info" type="submit" value="<spring:message code="label.updatedishtitle"/>">
     </p>
