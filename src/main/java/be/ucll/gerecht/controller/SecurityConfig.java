@@ -23,6 +23,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("gerecht/**").permitAll()
                 .mvcMatchers("/gerechten/").hasAnyRole("USER", "ADMIN")
                 .mvcMatchers("/gerechten/**").hasRole("ADMIN")
+                .mvcMatchers("/gerechten/***").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout().permitAll();
