@@ -12,17 +12,24 @@ import java.io.Serializable;
 @Entity
 public class Gerecht implements Serializable {
     @NotEmpty(message = "Description can not be empty.")
-    @Size(min = 4, max = 50,message = "Description length must be between 4 and 50.")
+    @Size(min = 4, max = 50, message = "Description length must be between 4 and 50.")
     private String description;
     private String type;
     @NotNull(message = "Price can not be empty.")
-    @DecimalMax(value = "10.0",message = "Price can't be higher than 10.")
-    @DecimalMin(value = "0.10",message = "Price can't be lower than 0.10.")
+    @DecimalMax(value = "10.0", message = "Price can't be higher than 10.")
+    @DecimalMin(value = "0.10", message = "Price can't be lower than 0.10.")
     private double price;
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    public Gerecht(int id, String d, double p, String t) {
+        setId(id);
+        setDescription(d);
+        setPrice(p);
+        setType(t);
+    }
 
     public Gerecht(String d, double p, String t) {
         setDescription(d);

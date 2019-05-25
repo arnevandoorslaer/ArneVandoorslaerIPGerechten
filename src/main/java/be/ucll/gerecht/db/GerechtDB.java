@@ -14,6 +14,7 @@ public class GerechtDB {
     private List<WeekMenu> weekMenus;
     private int CURRENT_ID = 1000;
     private AtomicInteger weekId = new AtomicInteger();
+
     public GerechtDB() {
         this.gerechten = new ArrayList<>();
         this.weekMenus = new ArrayList<>();

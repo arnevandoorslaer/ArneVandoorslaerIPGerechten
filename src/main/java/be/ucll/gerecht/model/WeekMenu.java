@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 public class WeekMenu implements Serializable {
-    @OneToMany(cascade= CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     List<DagMenu> menus;
     @JsonIgnore
     @Id
@@ -21,19 +21,24 @@ public class WeekMenu implements Serializable {
     public WeekMenu(int id) {
         setId(id);
         menus = new ArrayList<>();
-
     }
 
-    public WeekMenu(){};
+    public WeekMenu(int id,ArrayList<DagMenu> menus) {
+        setId(id);
+        this.menus = menus;
+    }
 
-    public void updateDagMenu(DagMenu dg){
+    public WeekMenu() {
+    }
+
+    public void updateDagMenu(DagMenu dg) {
         menus.remove(dg);
         menus.add(dg);
     }
 
     public void addDagMenu(DagMenu dagMenu) {
-        for (DagMenu menu:menus) {
-            if(menu.equals(dagMenu)){
+        for (DagMenu menu : menus) {
+            if (menu.equals(dagMenu)) {
                 throw new DomainException("Dagmenu already exists");
             }
         }

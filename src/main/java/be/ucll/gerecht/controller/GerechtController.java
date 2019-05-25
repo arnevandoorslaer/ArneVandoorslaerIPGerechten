@@ -25,7 +25,7 @@ public class GerechtController {
         return "index";
     }
 
-     @GetMapping(value = "/{locale:nl|en|fr}/gerechten")
+    @GetMapping(value = "/gerechten")
     public String gerechten(Model model) {
         ArrayList<String> errors = new ArrayList<>();
         if (service.getGerechten().size() > 0) {
@@ -37,7 +37,7 @@ public class GerechtController {
         return "gerechten";
     }
 
-    @GetMapping(value = "/{locale:nl|en|fr}/gerechten/change")
+    @GetMapping(value = "/gerechten/change")
     public String gerechtenChange(Model model) {
         ArrayList<String> errors = new ArrayList<>();
         if (service.getGerechten().size() > 0) {
@@ -49,7 +49,7 @@ public class GerechtController {
         return "gerechtenChange";
     }
 
-    @GetMapping(value = "/{locale:nl|en|fr}/gerechten/add")
+    @GetMapping(value = "/gerechten/add")
     public String gerechtenChange() {
         return "addGerecht";
     }
@@ -62,8 +62,7 @@ public class GerechtController {
                 FieldError fieldError = (FieldError) object;
                 errors.add(fieldError.getDefaultMessage());
             }
-        }
-        else{
+        } else {
             try {
                 service.addGerecht(gerecht);
             } catch (DBException e) {
@@ -80,7 +79,7 @@ public class GerechtController {
     }
 
 
-    @GetMapping(value = "/{locale:nl|en|fr}/gerechten/update/{gerecht.id}")
+    @GetMapping(value = "/gerechten/update/{gerecht.id}")
     public String update(@PathVariable(value = "gerecht.id") int id, Model model) {
         Gerecht gerecht = service.getGerechtById(id);
         model.addAttribute("gerecht", gerecht);
@@ -95,7 +94,7 @@ public class GerechtController {
                 FieldError fieldError = (FieldError) object;
                 errors.add(fieldError.getDefaultMessage());
             }
-        }else{
+        } else {
             try {
                 service.updateGerecht(gerecht);
             } catch (DBException e) {
@@ -110,7 +109,7 @@ public class GerechtController {
         return gerechtenChange(model);
     }
 
-    @GetMapping(value = "/{locale:nl|en|fr}/gerechten/delete/{gerecht.id}")
+    @GetMapping(value = "/gerechten/delete/{gerecht.id}")
     public String delete(@PathVariable(value = "gerecht.id") int id, Model model) {
         Gerecht gerecht = service.getGerechtById(id);
         model.addAttribute("gerecht", gerecht);
@@ -133,4 +132,5 @@ public class GerechtController {
 
         return "login";
     }
+
 }

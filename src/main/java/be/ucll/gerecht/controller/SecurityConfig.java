@@ -21,12 +21,15 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/weekmenu/*").permitAll()
                 .mvcMatchers("/weekmenus/*").permitAll()
                 .mvcMatchers("gerecht/**").permitAll()
+                .mvcMatchers("/login").permitAll()
+                .mvcMatchers("/login*").permitAll()
                 .mvcMatchers("/gerechten/").hasAnyRole("USER", "ADMIN")
                 .mvcMatchers("/gerechten/**").hasRole("ADMIN")
                 .mvcMatchers("/gerechten/***").hasRole("ADMIN")
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll();
+                .and().formLogin().loginProcessingUrl("/login_succes").loginPage("/login").permitAll()
+                .and().logout().logoutUrl("/logout")
+                .deleteCookies("JSESSIONID");
         httpSecurity.csrf().disable();
 
     }

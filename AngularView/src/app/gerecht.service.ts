@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {WeekMenu} from './menu';
 
 @Injectable({
@@ -7,7 +7,8 @@ import {WeekMenu} from './menu';
 })
 export class GerechtService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getMenus() {
     const geturl = 'http://localhost:8080/weekMenu';

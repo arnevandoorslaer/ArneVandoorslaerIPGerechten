@@ -24,28 +24,27 @@ public class MenuController {
 
     @PostMapping("/dagmenu/add")
     @ResponseStatus(HttpStatus.CREATED)
-
-    public List<WeekMenu> add(@RequestBody @Valid DagMenu dagMenu){
+    public List<WeekMenu> add(@RequestBody @Valid DagMenu dagMenu) {
         service.addDagMenu(dagMenu);
         return getWeekmenus();
     }
 
     @PostMapping("/dagmenu/change/{dagMenu.datum}")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<WeekMenu> update(@PathVariable(value = "dagMenu.datum") String datum,@RequestBody @Valid DagMenu dagMenu){
+    public List<WeekMenu> update(@PathVariable(value = "dagMenu.datum") String datum, @RequestBody @Valid DagMenu dagMenu) {
         service.updateDagMenu(dagMenu);
         return getWeekmenus();
     }
 
     @PostMapping("/weekMenu/{weekMenu.id}/")
     @ResponseStatus(HttpStatus.CREATED)
-    public WeekMenu getWeekMenu(@PathVariable(value = "weekMenu.id") int id){
+    public WeekMenu getWeekMenu(@PathVariable(value = "weekMenu.id") int id) {
         return service.getWeekMenu(id);
     }
 
     @PostMapping("/dagmenu/delete/{dagMenu.datum}")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<WeekMenu> delete(@PathVariable(value = "dagMenu.datum") String datum,@RequestBody @Valid DagMenu dagMenu){
+    public List<WeekMenu> delete(@PathVariable(value = "dagMenu.datum") String datum, @RequestBody @Valid DagMenu dagMenu) {
         service.removeDagMenu(dagMenu);
         return getWeekmenus();
     }

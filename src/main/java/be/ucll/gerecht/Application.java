@@ -1,9 +1,7 @@
 package be.ucll.gerecht;
 
-import be.ucll.gerecht.model.DagMenu;
 import be.ucll.gerecht.model.Gerecht;
 import be.ucll.gerecht.repository.GerechtRepository;
-import be.ucll.gerecht.repository.WeekMenuRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +13,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
     @Bean
-    CommandLineRunner runner(GerechtRepository gerechtRepository){
+    CommandLineRunner runner(GerechtRepository gerechtRepository) {
         return args -> {
             gerechtRepository.save(new Gerecht("Spaghetti", 3.4, "VEGGIE"));
             gerechtRepository.save(new Gerecht("Vol au vent", 3, "DAGSCHOTEL"));
@@ -28,5 +26,4 @@ public class Application {
             gerechtRepository.save(new Gerecht("Pasta kip", 3.25, "DAGSCHOTEL"));
         };
     }
-
 }

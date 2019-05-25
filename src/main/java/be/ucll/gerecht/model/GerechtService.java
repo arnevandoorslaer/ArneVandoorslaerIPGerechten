@@ -49,7 +49,7 @@ public class GerechtService {
         this.gerechtRepository.delete(g);
     }
 
-    public WeekMenu getWeekMenu(int id){
+    public WeekMenu getWeekMenu(int id) {
         return this.weekMenuRepository.findWeekMenuById(id);
     }
 

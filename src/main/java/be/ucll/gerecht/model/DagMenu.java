@@ -1,8 +1,10 @@
 package be.ucll.gerecht.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -10,9 +12,10 @@ import java.io.Serializable;
 public class DagMenu implements Serializable {
     private String dag;
     @Id
+    @NotNull
     private String datum;
-    @OneToOne(cascade= CascadeType.ALL)
-    private Gerecht veggie,soep,dagschotel;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Gerecht veggie, soep, dagschotel;
 
 
     public DagMenu(String dag, String datum, Gerecht veggie, Gerecht soep, Gerecht dagschotel) {
@@ -25,7 +28,8 @@ public class DagMenu implements Serializable {
     }
 
 
-    public DagMenu(){}
+    public DagMenu() {
+    }
 
     public void addVeggie(Gerecht gerecht) {
         this.veggie = gerecht;
@@ -60,20 +64,20 @@ public class DagMenu implements Serializable {
         return this.veggie;
     }
 
-    public Gerecht getSoep() {
-        return this.soep;
-    }
-
-    public Gerecht getDagschotel() {
-        return this.dagschotel;
-    }
-
     public void setVeggie(Gerecht veggie) {
         this.veggie = veggie;
     }
 
+    public Gerecht getSoep() {
+        return this.soep;
+    }
+
     public void setSoep(Gerecht soep) {
         this.soep = soep;
+    }
+
+    public Gerecht getDagschotel() {
+        return this.dagschotel;
     }
 
     public void setDagschotel(Gerecht dagschotel) {
@@ -83,7 +87,7 @@ public class DagMenu implements Serializable {
     @Override
     public String toString() {
         return "DagMenu{" +
-                ", dag='" + dag + '\'' +
+                "dag='" + dag + '\'' +
                 ", datum='" + datum + '\'' +
                 ", veggie=" + veggie +
                 ", soep=" + soep +
