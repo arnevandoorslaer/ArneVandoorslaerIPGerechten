@@ -14,15 +14,11 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .mvcMatchers("/").permitAll()
                 .mvcMatchers("/css/bootstrap.css").permitAll()
+                .mvcMatchers("/").permitAll()
                 .mvcMatchers("/*").permitAll()
                 .mvcMatchers("/dagmenu/*").permitAll()
-                .mvcMatchers("/weekmenu/*").permitAll()
-                .mvcMatchers("/weekmenus/*").permitAll()
-                .mvcMatchers("gerecht/**").permitAll()
-                .mvcMatchers("/login").permitAll()
-                .mvcMatchers("/login*").permitAll()
+                .mvcMatchers("/weekMenu").permitAll()
                 .mvcMatchers("/gerechten/").hasAnyRole("USER", "ADMIN")
                 .mvcMatchers("/gerechten/**").hasRole("ADMIN")
                 .mvcMatchers("/gerechten/***").hasRole("ADMIN")
